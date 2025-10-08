@@ -1,0 +1,24 @@
+---
+const { title, icon, skills } = Astro.props;
+---
+
+<div class="flex flex-col gap-6 rounded-xl bg-gray-100 p-10 shadow-lg transition-all hover:shadow-xl border border-transparent hover:border-gray-300">
+  <div class="flex items-center justify-center gap-4">
+    <img src={icon} alt={title + ' icon'} class="w-14 h-14" />
+    <h3 class="text-2xl font-bold text-[#31a8cc]">
+      {title}
+    </h3>
+  </div>
+
+  <div class="grid grid-cols-2 gap-y-8 gap-x-4">
+    {skills.map((skill: { icon: any; name: string; }) => (
+      <div class="flex items-center gap-2">
+        <img src={skill.icon} alt={skill.name + ' icon'} class="w-14 h-14" />
+        <span class="font-medium text-lg text-gray-900">
+          {skill.name}
+        </span>
+      </div>
+    ))}
+  </div>
+  
+</div>
