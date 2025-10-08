@@ -2,8 +2,8 @@
 const { title, icon, skills } = Astro.props;
 ---
 
-<div class="flex flex-col gap-6 rounded-xl bg-gray-100 p-10 shadow-lg transition-all hover:shadow-xl border border-transparent hover:border-gray-300">
-  <div class="flex items-center justify-center gap-4">
+<div class="flex flex-col gap-6 w-[90%] sm:w-[400px] rounded-xl bg-gray-100 p-10 shadow-lg transition-all hover:shadow-xl border border-transparent hover:border-gray-300">
+  <div class="flex items-center justify-center gap-4 border-b-2 border-gray-300 pb-4 mb-2">
     <img src={icon} alt={title + ' icon'} class="w-14 h-14" />
     <h3 class="text-2xl font-bold text-[#31a8cc]">
       {title}
