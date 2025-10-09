@@ -3,16 +3,29 @@ import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
 import About from "../components/About.astro";
 import Skills from "../components/Skills.astro";
+import Projects from "../components/Projects.astro";
 ---
 
 <Layout title="Portfolio | José Luis Vásquez Drouet">
   <Header />
   <main class="flex-1">
-    <section id="about" class="py-20 sm:py-24 lg:py-32">
-    <About />
-  </section>
-  <section id="skills" class="py-20 sm:py-24 lg:py-32">
-    <Skills />
-  </section>
-  </main>  
+    <section
+      id="about"
+      class="flex flex-col min-h-screen py-20 sm:py-24 lg:py-32"
+    >
+      <About />
+    </section>
+    <section
+      id="projects"
+      class="flex flex-col min-h-screen py-20 sm:py-24 lg:py-32 bg-gray-50"
+    >
+      <Projects />
+    </section>
+    <section
+      id="skills"
+      class="flex flex-col min-h-screen py-20 sm:py-24 lg:py-32"
+    >
+      <Skills />
+    </section>
+  </main>
 </Layout>

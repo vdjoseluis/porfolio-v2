@@ -33,11 +33,8 @@ const currentPath = Astro.url.pathname;
       {navItems.map((item) => (
         <a
           href={item.href}
-          class={`lg:text-lg font-medium transition-colors ${
-            currentPath === item.href
-              ? "text-[#31a8cc] underline"
-              : "text-gray-600 hover:text-[#31a8cc]"
-          }`}
+          data-section={item.href.replace('#', '')}
+          class="lg:text-lg font-medium transition-colors text-gray-600 hover:text-[#31a8cc]"
         >
           {item.name}
         </a>
@@ -88,3 +85,30 @@ const currentPath = Astro.url.pathname;
     </div>
   </div>
 </header>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const navLinks = Array.from(document.querySelectorAll('nav a[data-section]'));
+
+    function onScroll() {
+      let current = sections[0].id;
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 80) current = section.id;
+      }
+      navLinks.forEach(link => {
+        if (link.dataset.section === current) {
+          link.classList.add('text-[#31a8cc]', 'underline');
+          link.classList.remove('text-gray-600');
+        } else {
+          link.classList.remove('text-[#31a8cc]', 'underline');
+          link.classList.add('text-gray-600');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  });
+</script>
