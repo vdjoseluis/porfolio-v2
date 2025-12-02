@@ -115,25 +115,30 @@ import Layout from "../layouts/Layout.astro";
   </main>
 </Layout>
 
-<!-- coloca este script justo después del form o al final del body -->
 <script is:inline>
 (function () {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
-  // Elemento para mostrar estado al usuario (crearlo si no existe)
-  let statusEl = document.getElementById('form-status');
-  if (!statusEl) {
-    statusEl = document.createElement('div');
-    statusEl.id = 'form-status';
-    statusEl.setAttribute('role', 'status');
-    statusEl.style.marginTop = '0.5rem';
-    form.appendChild(statusEl);
+  // Contenedor donde pondremos el alert (debajo del formulario)
+  let alertContainer = document.getElementById('alert-container');
+  if (!alertContainer) {
+    alertContainer = document.createElement('div');
+    alertContainer.id = 'alert-container';
+    alertContainer.className = 'w-full max-w-lg mx-auto mt-4';
+    form.insertAdjacentElement('afterend', alertContainer);
   }
 
-  function setStatus(text, isError = false) {
-    statusEl.textContent = text;
-    statusEl.style.color = isError ? '#b91c1c' : '#065f46';
+  function showAlert(message, type = 'success') {
+    const color = type === 'success'
+      ? 'bg-green-100 border border-green-300 text-green-800'
+      : 'bg-red-100 border border-red-300 text-red-800';
+
+    alertContainer.innerHTML = `
+      <div class="${color} px-4 py-3 rounded-lg shadow-md text-center">
+        ${message}
+      </div>
+    `;
   }
 
   form.addEventListener('submit', async (e) => {
@@ -141,7 +146,7 @@ import Layout from "../layouts/Layout.astro";
     const submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) submitBtn.disabled = true;
 
-    setStatus('Enviando...', false);
+    showAlert('Enviando mensaje...', 'success');
 
     try {
       const res = await fetch('/api/contact', {
@@ -149,36 +154,23 @@ import Layout from "../layouts/Layout.astro";
         body: new FormData(form),
       });
 
-      // Si el servidor responde con error, leer texto para depuración
-      if (!res.ok) {
-        const text = await res.text();
-        console.error('Server error', res.status, text);
-        setStatus('Error al enviar el formulario. Intenta de nuevo más tarde.', true);
-        throw new Error(`Server error ${res.status}: ${text}`);
-      }
+      const data = await res.json().catch(() => null);
 
-      const contentType = res.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        const data = await res.json();
-        if (data?.success) {
-          setStatus(data.message ?? 'Mensaje enviado correctamente', false);
-          form.reset();
-        } else {
-          console.warn('Respuesta JSON con error', data);
-          setStatus(data?.error ?? 'Error al enviar el formulario', true);
-        }
+      if (res.ok && data?.success) {
+        showAlert('Tu mensaje fue enviado correctamente. Redirigiendo...', 'success');
+        form.reset();
+
+        // Esperar 2.5 segundos y luego ir al inicio
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2500);
+
       } else {
-        // Respuesta inesperada (HTML u otro). Mostrar texto para depuración y mensaje genérico al usuario
-        const text = await res.text();
-        console.warn('Respuesta no JSON del servidor:', text);
-        setStatus('Respuesta inesperada del servidor. Revisa la consola.', true);
+        showAlert(data?.error ?? 'Error al enviar el mensaje. Inténtalo de nuevo.', 'error');
       }
     } catch (err) {
-      console.error('Error en envío:', err);
-      // Si ya mostramos un mensaje específico, no sobrescribirlo; si no, mostrar genérico
-      if (!statusEl.textContent || statusEl.textContent === 'Enviando...') {
-        setStatus('Error al enviar el formulario. Revisa la consola para más detalles.', true);
-      }
+      console.error(err);
+      showAlert('Error inesperado. Intenta nuevamente más tarde.', 'error');
     } finally {
       if (submitBtn) submitBtn.disabled = false;
     }
