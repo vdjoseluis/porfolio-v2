@@ -11,7 +11,7 @@ const frontendSkills = [
   "Tailwind",
   "Bootstrap",
 ].map((name) => {
-  const icon = `/src/assets/skills/${name}.svg`;
+  const icon = `/skills/${name}.svg`;
   return { name, icon };
 });
 
@@ -25,7 +25,7 @@ const backendSkills = [
   "MongoDB",
   "Firebase",
 ].map((name) => {
-  const icon = `/src/assets/skills/${name}.svg`;
+  const icon = `/skills/${name}.svg`;
   return { name, icon };
 });
 
@@ -37,7 +37,7 @@ const mobileAndOthersSkills = [
   "Inkscape",
   "Canva",
 ].map((name) => {
-  const icon = `/src/assets/skills/${name}.svg`;
+  const icon = `/skills/${name}.svg`;
   return { name, icon };
 });
 ---
@@ -58,19 +58,19 @@ const mobileAndOthersSkills = [
   <div class="flex justify-center flex-wrap gap-10">
     <SkillCard
       title="Desarrollo Frontend"
-      icon="/src/assets/skills/Frontend.svg"
+      icon="/skills/Frontend.svg"
       skills={frontendSkills}
     />
 
     <SkillCard
       title="Backend - Bases de Datos"
-      icon="/src/assets/skills/Backend.svg"
+      icon="/skills/Backend.svg"
       skills={backendSkills}
     />
 
     <SkillCard
       title="Multiplataforma - Otros"
-      icon="/src/assets/skills/multi-platform.svg"
+      icon="/skills/multi-platform.svg"
       skills={mobileAndOthersSkills}
     />
   </div>
