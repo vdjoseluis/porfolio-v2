@@ -66,27 +66,19 @@ const navItems = [
 
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
-    const sections = Array.from(document.querySelectorAll("section[id]"));
     const navLinks = Array.from(document.querySelectorAll("nav a[data-section]"));
-
-    function onScroll() {
-      let current = sections[0].id;
-      for (const section of sections) {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 80) current = section.id;
-      }
-      navLinks.forEach((link) => {
-        if (link.dataset.section === current) {
-          link.classList.add("text-[#31a8cc]", "underline");
-          link.classList.remove("text-gray-600");
-        } else {
-          link.classList.remove("text-[#31a8cc]", "underline");
-          link.classList.add("text-gray-600");
+    navLinks.forEach(link => {
+      link.addEventListener("click", function(e) {
+        const sectionId = link.getAttribute("href").replace("/#", "");
+        const section = document.getElementById(sectionId);
+        if (section) {
+          e.preventDefault();
+          const headerOffset = 68; 
+          const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
         }
       });
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    });
   });
 </script>
