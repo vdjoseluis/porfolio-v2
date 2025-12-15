@@ -1,10 +1,11 @@
 <button
   id="scrollToTopBtn"
-  class="fixed bottom-6 right-6 z-50 hidden rounded-full bg-[#31a8cc] p-3 text-white shadow-lg transition-opacity hover:bg-[#2386a1] focus:outline-none"
+  class="fixed bottom-6 right-6 z-50 hidden rounded-full bg-[#31a8cc] p-3 text-white shadow-lg transition-opacity hover:bg-[#2386a1] focus:outline-none cursor-pointer"
   aria-label="Scroll to top"
+  title="Volver al inicio"
   onclick="window.scrollTo({top:0,behavior:'smooth'})"
 >
-   <img src="/scrollTop.svg" alt="Scroll to top icon" class="h-6 w-6"/>
+  <img src="/scrollTop.svg" alt="Scroll to top icon" class="h-6 w-6" />
 </button>
 <script is:inline>
   const btn = document.getElementById("scrollToTopBtn");

@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projects = [
+  {
+    title: "Sophie's Burgers",
+    description:
+      "Aplicación Full Stack desarrollada como proyecto de Formación Profesional de DAW, acerca de un restaurante hamburguesería.",
+    imageUrl: "/screenshots/sophies1.png",
+    skills: ["React", "NodeJS", "Express", "MySQL"],
+  },
+  {
+    title: "Code & Cocktails",
+    description:
+      "App que permite buscar cócteles y bebidas, ver sus recetas e ingredientes y crear una lista de favoritos.",
+    imageUrl: "/screenshots/codeAndCocktails1.png",
+    skills: ["Angular", "TailwindCSS", "API REST"],
+  },
+  {
+    title: "VD Logistics - Desktop",
+    description:
+      "Aplicación de escritorio para la gestión y control de operarciones logísticas. Vista de tablas de servicios, clientes, usuarios, incidencias y logs.",
+    imageUrl: "/screenshots/vdLogisticsDesktop1.png",
+    skills: ["Java", "Firebase"],
+  },
+  {
+    title: "VD Logistics - Mobile",
+    description:
+      "Aplicación móvil para los diferentes operadores de VD Logistics. Gestión de servicios, incidencias y notificaciones push.",
+    imageUrl: "/screenshots/vdLogisticsMobile1.png",
+    skills: ["Android", "Kotlin", "Firebase"],
+  },
+  {
+    title: "VD Logistics - Web",
+    description:
+      "Aplicación web para la gestión administrativa de VD Logistics. Gestión de usuarios, clientes, servicios, incidencias y reportes.",
+    imageUrl: "/screenshots/vdLogisticsWeb1.png",
+    skills: ["Angular", "Firebase"],
+  },
+  {
+    title: "Countries App",
+    description:
+      "Aplicación que realiza búsquedas de países por nombre o por capital. Muestra listados de países clasificados por continentes.",
+    imageUrl: "/screenshots/countries1.png",
+    skills: ["Angular", "TailwindCSS", "API REST"],
+  },
+];
+---
+
+<Layout title="Portfolio | José Luis Vásquez Drouet">
+  <section class="flex flex-col min-h-screen py-10 items-center gap-4 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">Proyectos</h2>
+    <p class="text-gray-500 text-center md:text-lg font-medium mb-2">
+      Una selección de proyectos que demuestran mis habilidades y experiencia.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+      {projects.map((project) => <ProjectCard {...project} />)}
+    </div>
+  </section>
+</Layout>

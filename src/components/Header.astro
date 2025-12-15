@@ -2,9 +2,9 @@
 import "../styles/global.css";
 
 const navItems = [
-  { name: "Acerca de mí", href: "/#about" },
-  { name: "Proyectos", href: "/#projects" },
-  { name: "Habilidades", href: "/#skills" },
+  { name: "Acerca de mí", href: "/" },
+  { name: "Proyectos", href: "/projects" },
+  { name: "Habilidades", href: "/skills" },
   { name: "Contacto", href: "/contact" },
 ];
 ---
@@ -21,13 +21,14 @@ const navItems = [
       <h2 class="text-2xl font-bold text-gray-900">Portfolio</h2>
     </div>
 
-    <nav class="hidden md:flex items-center gap-8">
+    <!-- NAV DESKTOP -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
       {
         navItems.map((item) => (
           <a
             href={item.href}
             data-section={item.href.replace("#", "")}
-            class="lg:text-lg font-medium transition-colors text-gray-600 hover:text-[#31a8cc]"
+            class="lg:text-lg font-medium transition-colors text-gray-600 hover:text-[#31a8cc] hover:underline"
           >
             {item.name}
           </a>
@@ -37,48 +38,102 @@ const navItems = [
 
     <div class="flex items-center">
       <a
-        href="#"
+        href="/JoseLuisVasquezDrouet_CV.pdf"
+        download
+        title="Descargar"
         class="items-center justify-center rounded bg-[#31a8cc] px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#31a8cc]/90 focus:outline-none focus:ring-2 focus:ring-[#31a8cc] focus:ring-offset-2"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6"
-          ><g class="download-outline"
-            ><g fill="currentColor" fill-rule="evenodd" class="Vector" clip-rule="evenodd"
-              ><path
-                d="M7 22a5 5 0 0 1-5-5v-3a1 1 0 1 1 2 0v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-3a1 1 0 1 1 2 0v3a5 5 0 0 1-5 5z"
-              ></path><path
-                d="M17.715 10.9a1 1 0 0 1-.016 1.415l-4.5 4.4a1 1 0 0 1-1.398 0l-4.5-4.4a1 1 0 1 1 1.398-1.43l2.801 2.739V5a1 1 0 1 1 2 0v8.624l2.8-2.739a1 1 0 0 1 1.415.016Z"
-              ></path></g
-            ></g
-          ></svg
-        >
-
+        <img src="/icons/download.svg" alt="Icono de descarga" class="inline-block h-6 w-6" />
         Curriculum
       </a>
-      <button class="md:hidden ml-4 p-2 rounded-md text-gray-600 hover:bg-gray-200">
-        <span class="sr-only">Open menu</span>
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-        </svg>
+
+      <!-- BOTÓN MÓVIL -->
+      <button
+        id="menu-toggle"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        class="md:hidden ml-4 p-2 rounded-md text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#31a8cc] cursor-pointer"
+      >
+        <!-- <span class="sr-only">Abrir menú</span> -->
+        <img src="/icons/menu.svg" alt="Icono de menú" class="h-6 w-6" />
       </button>
+    </div>
+  </div>
+
+  <!-- MENU MÓVIL: aparece solo en pantallas < md -->
+  <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-4 flex flex-col gap-2">
+      {
+        navItems.map((item) => (
+          <a href={item.href} class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">
+            {item.name}
+          </a>
+        ))
+      }
+      <a
+        href="/JoseLuisVasquezDrouet_CV.pdf"
+        download
+        class="mt-2 inline-flex items-center justify-center rounded bg-[#31a8cc] px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-[#31a8cc]/90"
+      >
+        Descargar CV
+      </a>
     </div>
   </div>
 </header>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const navLinks = Array.from(document.querySelectorAll("nav a[data-section]"));
-    navLinks.forEach(link => {
-      link.addEventListener("click", function(e) {
-        const sectionId = link.getAttribute("href").replace("/#", "");
-        const section = document.getElementById(sectionId);
-        if (section) {
-          e.preventDefault();
-          const headerOffset = 68; 
-          const elementPosition = section.getBoundingClientRect().top + window.scrollY;
-          const offsetPosition = elementPosition - headerOffset;
-          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+  (() => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const links = Array.from(document.querySelectorAll("nav a, #mobile-menu a"));
+
+    const setMenu = (open) => {
+      if (!mobileMenu || !menuToggle) return;
+      mobileMenu.classList.toggle("hidden", !open);
+      mobileMenu.classList.toggle("block", open);
+      menuToggle.setAttribute("aria-expanded", String(Boolean(open)));
+    };
+
+    // Toggle button
+    menuToggle?.addEventListener("click", () => setMenu(!mobileMenu.classList.contains("block")));
+
+    // Close when clicking a link inside mobile menu
+    mobileMenu?.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (a) setMenu(false);
+    });
+
+    // Close on Escape or click outside when open
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setMenu(false);
+    });
+    document.addEventListener("click", (e) => {
+      if (!mobileMenu || mobileMenu.classList.contains("hidden")) return;
+      if (!e.target.closest("header")) setMenu(false);
+    });
+
+    // Mark active by pathname (exact match, root '/')
+    const updateActive = () => {
+      const path = location.pathname.replace(/\/$/, "") || "/";
+      links.forEach((a) => {
+        try {
+          const hrefPath = new URL(a.href, location.href).pathname.replace(/\/$/, "") || "/";
+          const isActive = hrefPath === path;
+          a.classList.toggle("active", isActive);
+          if (isActive) a.setAttribute("aria-current", "page");
+          else a.removeAttribute("aria-current");
+        } catch {
+          /* ignore */
         }
       });
+    };
+
+    // Init + SPA hooks
+    updateActive();
+    window.addEventListener("popstate", updateActive);
+    document.addEventListener("astro:after-swap", () => {
+      updateActive();
+      setMenu(false);
     });
-  });
+  })();
 </script>
