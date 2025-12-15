@@ -1,11 +1,31 @@
 ---
 import "../styles/global.css";
+import es from "../i18n/es.json";
+import en from "../i18n/en.json";
+import it from "../i18n/it.json";
+
+type Lang = "es" | "en" | "it";
+const dict: Record<Lang, typeof es> = { es, en, it };
+
+const lang = (Astro.url.pathname.split("/")[1] || "es") as Lang;
+const t = dict[lang];
 
 const navItems = [
-  { name: "Acerca de mí", href: "/" },
-  { name: "Proyectos", href: "/projects" },
-  { name: "Habilidades", href: "/skills" },
-  { name: "Contacto", href: "/contact" },
+  { label: t.header.about, href: `/${lang}` },
+  { label: t.header.projects, href: `/${lang}/projects` },
+  { label: t.header.skills, href: `/${lang}/skills` },
+  { label: t.header.contact, href: `/${lang}/contact` },
+];
+
+const pathname = Astro.url.pathname;
+
+// quitar '/siglas pais' del inicio
+const currentPath = pathname.replace(/^\/(es|en|it)/, "") || "";
+
+const languages = [
+  { code: "es", name: "Español" },
+  { code: "en", name: "English" },
+  { code: "it", name: "Italiano" },
 ];
 ---
 
@@ -27,24 +47,41 @@ const navItems = [
         navItems.map((item) => (
           <a
             href={item.href}
-            data-section={item.href.replace("#", "")}
             class="lg:text-lg font-medium transition-colors text-gray-600 hover:text-[#31a8cc] hover:underline"
           >
-            {item.name}
+            {item.label}
           </a>
         ))
       }
     </nav>
 
+    <!-- LANGUAGE SELECTOR -->
+    <div class="flex items-center gap-2">
+      {
+        languages.map((l) => (
+          <a
+            href={`/${l.code}${currentPath}`}
+            class={`inline-flex items-center transition ${
+              l.code === lang ? "opacity-100" : "opacity-30 hover:opacity-100"
+            }`}
+            aria-label={l.name}
+            title={l.name}
+          >
+            <img src={`/flags/${l.code}.svg`} alt={l.name} class="h-5" loading="lazy" />
+          </a>
+        ))
+      }
+    </div>
+
     <div class="flex items-center">
       <a
         href="/JoseLuisVasquezDrouet_CV.pdf"
         download
-        title="Descargar"
-        class="items-center justify-center rounded bg-[#31a8cc] px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#31a8cc]/90 focus:outline-none focus:ring-2 focus:ring-[#31a8cc] focus:ring-offset-2"
+        title={t.header.cv}
+        class="items-center justify-center rounded-full lg:rounded bg-[#31a8cc] p-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#31a8cc]/90 focus:outline-none focus:ring-2 focus:ring-[#31a8cc] focus:ring-offset-2"
       >
         <img src="/icons/download.svg" alt="Icono de descarga" class="inline-block h-6 w-6" />
-        Curriculum
+        <span class="hidden lg:inline">{t.header.cv}</span>
       </a>
 
       <!-- BOTÓN MÓVIL -->
@@ -66,7 +103,7 @@ const navItems = [
       {
         navItems.map((item) => (
           <a href={item.href} class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">
-            {item.name}
+            {item.label}
           </a>
         ))
       }
@@ -75,7 +112,7 @@ const navItems = [
         download
         class="mt-2 inline-flex items-center justify-center rounded bg-[#31a8cc] px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-[#31a8cc]/90"
       >
-        Descargar CV
+        {t.header.cv}
       </a>
     </div>
   </div>

@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import es from "../../i18n/es.json";
+import en from "../../i18n/en.json";
+import it from "../../i18n/it.json";
+
+type Lang = "es" | "en" | "it";
+type ProjectId = "sophies" | "cocktails" | "vdDesktop" | "vdMobile" | "vdWeb" | "countries";
+const dict: Record<Lang, typeof es> = { es, en, it };
+const lang = (Astro.params.lang ?? "es") as Lang;
+const t = dict[lang];
+const projects: { id: ProjectId; title: string; imageUrl: string; skills: string[] }[] = [
+  {
+    id: "sophies",
+    title: "Sophie's Burgers",
+    imageUrl: "/screenshots/sophies1.png",
+    skills: ["React", "NodeJS", "Express", "MySQL"],
+  },
+  {
+    id: "cocktails",
+    title: "Code & Cocktails",
+    imageUrl: "/screenshots/codeAndCocktails1.png",
+    skills: ["Angular", "TailwindCSS", "API REST"],
+  },
+  {
+    id: "vdDesktop",
+    title: "VD Logistics - Desktop",
+    imageUrl: "/screenshots/vdLogisticsDesktop1.png",
+    skills: ["Java", "Firebase"],
+  },
+  {
+    id: "vdMobile",
+    title: "VD Logistics - Mobile",
+    imageUrl: "/screenshots/vdLogisticsMobile1.png",
+    skills: ["Android", "Kotlin", "Firebase"],
+  },
+  {
+    id: "vdWeb",
+    title: "VD Logistics - Web",
+    imageUrl: "/screenshots/vdLogisticsWeb1.png",
+    skills: ["Angular", "Firebase"],
+  },
+  {
+    id: "countries",
+    title: "Countries App",
+    imageUrl: "/screenshots/countries1.png",
+    skills: ["Angular", "TailwindCSS", "API REST"],
+  },
+];
+---
+
+<Layout title={t.meta.projectsTitle}>
+  <section class="flex flex-col min-h-screen py-10 items-center gap-4 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">{t.projects.title}</h2>
+    <p class="text-gray-500 text-center md:text-lg font-medium mb-2">
+      {t.projects.subtitle}
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        projects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            description={t.projects.descriptions[project.id]}
+            imageUrl={project.imageUrl}
+            skills={project.skills}
+          />
+        ))
+      }
+    </div>
+  </section>
+</Layout>

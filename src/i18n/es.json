@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "homeTitle": "Acerca de mí | Portfolio",
+    "projectsTitle": "Proyectos | Portfolio",
+    "skillsTitle": "Habilidades | Portfolio",
+    "contactTitle": "Contacto | Portfolio"
+  },
+  "header": {
+    "about": "Acerca de mí",
+    "projects": "Proyectos",
+    "skills": "Habilidades",
+    "contact": "Contacto",
+    "cv": "Descargar CV"
+  },
+
+  "home": {
+    "typing": "Hola, soy José Luis",
+    "subtitle": "Desarrollador Web y Multiplataforma",
+    "p1": "Con doble formación profesional, me especializo en crear soluciones digitales innovadoras y eficientes. Mi enfoque se centra en la usabilidad, el rendimiento y la adaptabilidad, asegurando que cada proyecto cumpla con los más altos estándares de calidad.",
+    "p2": "Apasionado por la tecnología y en constante evolución, me encanta transformar ideas en experiencias funcionales.",
+    "languagesTitle": "Idiomas",
+    "languages": ["Español", "Italiano", "Catalán", "Inglés", "Francés"],
+    "levels": ["Nativo", "Alto", "Alto", "Medio", "Básico"],
+    "projectsBtn": "Ver Proyectos",
+    "contactBtn": "Contactar"
+  },
+
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Una selección de proyectos que demuestran mis habilidades y experiencia.",
+    "descriptions": {
+      "sophies": "Aplicación Full Stack desarrollada como proyecto de Formación Profesional de DAW, acerca de un restaurante hamburguesería.",
+      "cocktails": "App que permite buscar cócteles y bebidas, ver sus recetas e ingredientes y crear una lista de favoritos.",
+      "vdDesktop": "Aplicación de escritorio para la gestión y control de operaciones logísticas.",
+      "vdMobile": "Aplicación móvil para operadores de VD Logistics, con gestión de servicios e incidencias.",
+      "vdWeb": "Aplicación web para la gestión administrativa de VD Logistics.",
+      "countries": "Aplicación que permite buscar países por nombre o capital y listarlos por continente."
+    }
+  },
+
+  "skills": {
+    "title": "Mis Habilidades",
+    "subtitle": "Una vista de mis competencias técnicas, organizadas para una rápida identificación de valor.",
+    "frontend": "Desarrollo Frontend",
+    "backend": "Backend - Bases de Datos",
+    "other": "Multiplataforma - Otros"
+  },
+
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Toda gran colaboración empieza con una conversación.",
+    "subtitleStrong": "¿Hablamos? Completa el formulario.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "placeholder": "Escribe tu mensaje aquí",
+    "send": "Enviar mensaje",
+
+    "sending": "Enviando mensaje...",
+    "success": "Tu mensaje fue enviado correctamente. Redirigiendo...",
+    "error": "Error al enviar el mensaje. Inténtalo de nuevo.",
+    "unexpected": "Error inesperado. Intenta nuevamente más tarde.",
+
+    "otherContact": "O contáctame en:"
+  }
+}

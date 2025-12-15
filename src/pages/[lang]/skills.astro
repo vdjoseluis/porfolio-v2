@@ -1,6 +1,14 @@
 ---
-import SkillCard from "../components/SkillCard.astro";
-import Layout from "../layouts/Layout.astro";
+import SkillCard from "../../components/SkillCard.astro";
+import Layout from "../../layouts/Layout.astro";
+import es from "../../i18n/es.json";
+import en from "../../i18n/en.json";
+import it from "../../i18n/it.json";
+
+type Lang = "es" | "en" | "it";
+const dict: Record<Lang, typeof es> = { es, en, it };
+const lang = (Astro.params.lang ?? "es") as Lang;
+const t = dict[lang];
 
 const frontendSkills = ["Angular", "React", "HTML", "CSS", "JavaScript", "TypeScript", "Tailwind", "Bootstrap"].map(
   (name) => {
@@ -20,21 +28,21 @@ const mobileAndOthersSkills = ["Android", "Kotlin", "Git", "Github", "Inkscape",
 });
 ---
 
-<Layout title="Portfolio | José Luis Vásquez Drouet">
+  <Layout title={t.meta.skillsTitle}>
   <section class="flex flex-col min-h-screen py-10 items-center gap-10">
     <div class="flex flex-col items-center gap-4">
-      <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">Mis Habilidades</h2>
+      <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">{t.skills.title}</h2>
       <p class="max-w-[400px] md:max-w-[600px] text-gray-500 text-center md:text-lg font-medium">
-        Una vista de mis competencias técnicas, organizadas para una rápida identificación de valor.
+        {t.skills.subtitle}
       </p>
     </div>
 
     <div class="flex justify-center flex-wrap gap-10">
-      <SkillCard title="Desarrollo Frontend" icon="/skills/Frontend.svg" skills={frontendSkills} />
+      <SkillCard title={t.skills.frontend} icon="/skills/Frontend.svg" skills={frontendSkills} />
 
-      <SkillCard title="Backend - Bases de Datos" icon="/skills/Backend.svg" skills={backendSkills} />
+      <SkillCard title={t.skills.backend} icon="/skills/Backend.svg" skills={backendSkills} />
 
-      <SkillCard title="Multiplataforma - Otros" icon="/skills/multi-platform.svg" skills={mobileAndOthersSkills} />
+      <SkillCard title={t.skills.other} icon="/skills/multi-platform.svg" skills={mobileAndOthersSkills} />
     </div>
   </section>
 </Layout>

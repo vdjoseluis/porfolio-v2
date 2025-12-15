@@ -1,17 +1,25 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
+import es from "../../i18n/es.json";
+import en from "../../i18n/en.json";
+import it from "../../i18n/it.json";
+
+type Lang = "es" | "en" | "it";
+const dict: Record<Lang, typeof es> = { es, en, it };
+const lang = (Astro.params.lang ?? "es") as Lang;
+const t = dict[lang];
 ---
 
-<Layout title="Portfolio | José Luis Vásquez Drouet">
+<Layout title={t.meta.contactTitle}>
   <main class="flex flex-col items-center justify-center gap-16 my-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <section id="contact" class="w-full">
       <article
         class="flex flex-col items-center justify-center gap-4 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center"
       >
-        <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">Contacto</h2>
+        <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl text-gray-900">{t.contact.title}</h2>
         <p class="text-gray-500 md:text-lg font-medium mb-2">
-          Toda gran colaboración empieza con una conversación. <br /><strong>¿Hablamos? </strong>Completa el formulario
-          o contáctame directamente.
+          {t.contact.subtitle}
+          <br /><strong>{t.contact.subtitleStrong}</strong>
         </p>
         <form
           id="contact-form"
@@ -20,10 +28,15 @@ import Layout from "../layouts/Layout.astro";
           name="contact"
           aria-label="Formulario de contacto"
           autocomplete="on"
+          data-sending={t.contact.sending}
+          data-success={t.contact.success}
+          data-error={t.contact.error}
+          data-unexpected={t.contact.unexpected}
+          data-redirect={`/${lang}`}
         >
           <input type="hidden" name="form-name" value="contact" />
           <div>
-            <label class="block text-left font-semibold mb-1" for="name">Nombre</label>
+            <label class="block text-left font-semibold mb-1" for="name">{t.contact.name}</label>
             <input
               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
               type="text"
@@ -33,7 +46,7 @@ import Layout from "../layouts/Layout.astro";
             />
           </div>
           <div>
-            <label class="block text-left font-semibold mb-1" for="email">Correo electrónico</label>
+            <label class="block text-left font-semibold mb-1" for="email">{t.contact.email}</label>
             <input
               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
               type="email"
@@ -43,13 +56,13 @@ import Layout from "../layouts/Layout.astro";
             />
           </div>
           <div>
-            <label class="block text-left font-semibold mb-1" for="message">Mensaje</label>
+            <label class="block text-left font-semibold mb-1" for="message">{t.contact.message}</label>
             <textarea
               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
               id="message"
               name="message"
               rows="5"
-              placeholder="Escribe tu mensaje aquí"
+              placeholder={t.contact.placeholder}
               style="resize: none"
               required></textarea>
           </div>
@@ -57,11 +70,11 @@ import Layout from "../layouts/Layout.astro";
             type="submit"
             class="mt-2 px-6 py-3 bg-[#31a8cc] text-white font-medium rounded-lg shadow-md hover:bg-[#2596b2] transition-colors duration-300"
           >
-            Enviar mensaje
+            {t.contact.send}
           </button>
         </form>
         <div class="flex flex-col items-center gap-2 mt-6">
-          <span class="font-semibold text-gray-700">O contáctame en:</span>
+          <span class="font-semibold text-gray-700">{t.contact.otherContact}</span>
           <div class="flex gap-4 justify-center mt-2">
             <a
               href="mailto:vdjoseluis@outlook.com"
@@ -111,67 +124,5 @@ import Layout from "../layouts/Layout.astro";
       </article>
     </section>
   </main>
+  <script src="/contact.js" is:inline></script>
 </Layout>
-
-<script is:inline>
-(function () {
-  const form = document.getElementById('contact-form');
-  if (!form) return;
-
-  // Contenedor donde pondremos el alert (debajo del formulario)
-  let alertContainer = document.getElementById('alert-container');
-  if (!alertContainer) {
-    alertContainer = document.createElement('div');
-    alertContainer.id = 'alert-container';
-    alertContainer.className = 'w-full max-w-lg mx-auto mt-4';
-    form.insertAdjacentElement('afterend', alertContainer);
-  }
-
-  function showAlert(message, type = 'success') {
-    const color = type === 'success'
-      ? 'bg-green-100 border border-green-300 text-green-800'
-      : 'bg-red-100 border border-red-300 text-red-800';
-
-    alertContainer.innerHTML = `
-      <div class="${color} px-4 py-3 rounded-lg shadow-md text-center">
-        ${message}
-      </div>
-    `;
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const submitBtn = form.querySelector('button[type="submit"]');
-    if (submitBtn) submitBtn.disabled = true;
-
-    showAlert('Enviando mensaje...', 'success');
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        body: new FormData(form),
-      });
-
-      const data = await res.json().catch(() => null);
-
-      if (res.ok && data?.success) {
-        showAlert('Tu mensaje fue enviado correctamente. Redirigiendo...', 'success');
-        form.reset();
-
-        // Esperar 2.5 segundos y luego ir al inicio
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 2500);
-
-      } else {
-        showAlert(data?.error ?? 'Error al enviar el mensaje. Inténtalo de nuevo.', 'error');
-      }
-    } catch (err) {
-      console.error(err);
-      showAlert('Error inesperado. Intenta nuevamente más tarde.', 'error');
-    } finally {
-      if (submitBtn) submitBtn.disabled = false;
-    }
-  });
-})();
-</script>
