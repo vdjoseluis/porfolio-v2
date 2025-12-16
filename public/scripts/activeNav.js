@@ -1,4 +1,4 @@
-export function initActiveNav() {
+function initActiveNav() {
   const links = document.querySelectorAll("nav a, #mobile-menu a");
 
   if (!links.length) return;

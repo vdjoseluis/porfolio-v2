@@ -1,4 +1,4 @@
-export function initTheme() {
+function initTheme() {
   const html = document.documentElement;
   const toggle = document.getElementById("theme-toggle");
 

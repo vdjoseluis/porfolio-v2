@@ -1,4 +1,4 @@
-export function initMobileMenu() {
+function initMobileMenu() {
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
   const header = document.querySelector("header");

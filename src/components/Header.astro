@@ -1,7 +1,5 @@
 ---
 import "../styles/global.css";
-import { initMobileMenu } from "../scripts/mobileMenu";
-import { initActiveNav } from "../scripts/activeNav";
 import es from "../i18n/es.json";
 import en from "../i18n/en.json";
 import it from "../i18n/it.json";
@@ -123,13 +121,3 @@ const languages = [
     </div>
   </div>
 </header>
-
-<script is:inline define:vars={{ initMobileMenu, initActiveNav }}>
-  const init = () => {
-    initMobileMenu();
-    initActiveNav();
-  };
-
-  document.addEventListener("astro:page-load", init);
-  document.addEventListener("astro:after-swap", init);
-</script>
