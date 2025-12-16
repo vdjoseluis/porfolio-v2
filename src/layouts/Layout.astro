@@ -26,14 +26,13 @@ const lang = Astro.url.pathname.split("/")[1] || "es";
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <script is:inline>
-      document.addEventListener("astro:page-load", () => {
+    <script is:inline define:vars={{ initTheme }}>
+      const runTheme = () => {
         initTheme();
-      });
+      };
 
-      document.addEventListener("astro:after-swap", () => {
-        initTheme();
-      });
+      document.addEventListener("astro:page-load", runTheme);
+      document.addEventListener("astro:after-swap", runTheme);
     </script>
   </head>
   <body>
