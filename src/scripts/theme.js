@@ -50,7 +50,9 @@ export function initTheme() {
   }
 }
 
-const runTheme = () => initTheme();
+if (typeof window !== "undefined") {
+  const runTheme = () => initTheme();
 
-document.addEventListener("astro:page-load", runTheme);
-document.addEventListener("astro:after-swap", runTheme);
+  document.addEventListener("astro:page-load", runTheme);
+  document.addEventListener("astro:after-swap", runTheme);
+}

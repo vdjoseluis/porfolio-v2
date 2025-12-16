@@ -43,7 +43,9 @@ export function initMobileMenu() {
   }
 }
 
-const runMenu = () => initMobileMenu();
+if (typeof window !== "undefined") {
+  const runMenu = () => initMobileMenu();
 
-document.addEventListener("astro:page-load", runMenu);
-document.addEventListener("astro:after-swap", runMenu);
+  document.addEventListener("astro:page-load", runMenu);
+  document.addEventListener("astro:after-swap", runMenu);
+}

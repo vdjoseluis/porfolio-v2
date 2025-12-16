@@ -23,7 +23,9 @@ export function initActiveNav() {
   });
 }
 
-const runNav = () => initActiveNav();
+if (typeof window !== "undefined") {
+  const runNav = () => initActiveNav();
 
-document.addEventListener("astro:page-load", runNav);
-document.addEventListener("astro:after-swap", runNav);
+  document.addEventListener("astro:page-load", runNav);
+  document.addEventListener("astro:after-swap", runNav);
+}
