@@ -1,3 +1,15 @@
 ---
-Astro.redirect("/es");
+const defaultLang = "es";
 ---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=/${defaultLang}`} />
+    <script>
+      window.location.replace("/es");
+    </script>
+  </head>
+  <body></body>
+</html>
