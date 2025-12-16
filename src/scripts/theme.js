@@ -49,3 +49,8 @@ export function initTheme() {
     window.__themeMediaBound = true;
   }
 }
+
+const runTheme = () => initTheme();
+
+document.addEventListener("astro:page-load", runTheme);
+document.addEventListener("astro:after-swap", runTheme);

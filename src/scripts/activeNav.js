@@ -22,3 +22,8 @@ export function initActiveNav() {
     }
   });
 }
+
+const runNav = () => initActiveNav();
+
+document.addEventListener("astro:page-load", runNav);
+document.addEventListener("astro:after-swap", runNav);

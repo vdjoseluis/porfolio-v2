@@ -36,6 +36,12 @@ const lang = Astro.url.pathname.split("/")[1] || "es";
     </script>
   </head>
   <body>
+    <script type="module" src={new URL("../scripts/theme.js", import.meta.url).toString()}></script>
+
+    <script type="module" src={new URL("../scripts/mobileMenu.js", import.meta.url).toString()}></script>
+
+    <script type="module" src={new URL("../scripts/activeNav.js", import.meta.url).toString()}></script>
+
     <ClientRouter />
     <Header data-astro-transition-persist />
     <slot />
