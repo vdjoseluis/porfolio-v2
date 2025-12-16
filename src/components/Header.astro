@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import { initMobileMenu } from "../scripts/mobileMenu";
+import { initActiveNav } from "../scripts/activeNav";
 import es from "../i18n/es.json";
 import en from "../i18n/en.json";
 import it from "../i18n/it.json";
@@ -122,18 +124,12 @@ const languages = [
   </div>
 </header>
 
-<script type="module">
-  import { initMobileMenu } from "../scripts/mobileMenu";
-  import { initActiveNav } from "../scripts/activeNav";
-
+<script is:inline>
   const init = () => {
     initMobileMenu();
     initActiveNav();
   };
 
-  // 1️⃣ Primer render (incluye redirect inicial)
   document.addEventListener("astro:page-load", init);
-
-  // 2️⃣ Navegación SPA
   document.addEventListener("astro:after-swap", init);
 </script>

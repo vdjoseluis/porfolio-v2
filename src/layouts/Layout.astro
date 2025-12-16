@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import { ClientRouter } from "astro:transitions";
+import { initTheme } from "../scripts/theme";
 
 interface Props {
   title: string;
@@ -25,11 +26,14 @@ const lang = Astro.url.pathname.split("/")[1] || "es";
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <script type="module">
-      import { initTheme } from "../scripts/theme";
+    <script is:inline>
+      document.addEventListener("astro:page-load", () => {
+        initTheme();
+      });
 
-      document.addEventListener("astro:page-load", initTheme);
-      document.addEventListener("astro:after-swap", initTheme);
+      document.addEventListener("astro:after-swap", () => {
+        initTheme();
+      });
     </script>
   </head>
   <body>
