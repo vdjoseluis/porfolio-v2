@@ -1,4 +1,4 @@
-import { defineMiddleware } from "astro/middleware";
+/* import { defineMiddleware } from "astro/middleware";
 
 export const onRequest = defineMiddleware(
   ({ request, redirect }, next) => {
@@ -19,3 +19,4 @@ export const onRequest = defineMiddleware(
     return next();
   }
 );
+ */
