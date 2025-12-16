@@ -131,6 +131,9 @@ const languages = [
     initActiveNav();
   };
 
-  init();
+  // 1️⃣ Primer render (incluye redirect inicial)
+  document.addEventListener("astro:page-load", init);
+
+  // 2️⃣ Navegación SPA
   document.addEventListener("astro:after-swap", init);
 </script>

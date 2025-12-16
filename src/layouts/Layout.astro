@@ -28,7 +28,7 @@ const lang = Astro.url.pathname.split("/")[1] || "es";
     <script type="module">
       import { initTheme } from "/src/scripts/theme";
 
-      initTheme();
+      document.addEventListener("astro:page-load", initTheme);
       document.addEventListener("astro:after-swap", initTheme);
     </script>
   </head>
