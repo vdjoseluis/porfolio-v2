@@ -11,118 +11,111 @@ const t = dict[lang];
 ---
 
 <Layout title={t.meta.contactTitle}>
-  <main class="flex flex-col items-center justify-center gap-16 my-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <section id="contact" class="w-full">
-      <article
-        class="flex flex-col items-center justify-center gap-4 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center"
+  <section id="contact" class="flex flex-col min-h-screen py-10 items-center px-4">
+    <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">{t.contact.title}</h2>
+    <p class="md:text-lg font-medium my-2 text-center">
+      {t.contact.subtitle}
+      <br /><strong>{t.contact.subtitleStrong}</strong>
+    </p>
+    <form
+      id="contact-form"
+      name="contact"
+      class="w-full max-w-2xl flex flex-col gap-4 bg-white rounded-lg shadow p-6"
+      name="contact"
+      aria-label="Formulario de contacto"
+      autocomplete="on"
+      data-sending={t.contact.sending}
+      data-success={t.contact.success}
+      data-error={t.contact.error}
+      data-unexpected={t.contact.unexpected}
+      data-redirect={`/${lang}`}
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <div>
+        <label class="block text-left font-semibold mb-1" for="name">{t.contact.name}</label>
+        <input
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
+          type="text"
+          id="name"
+          name="name"
+          required
+        />
+      </div>
+      <div>
+        <label class="block text-left font-semibold mb-1" for="email">{t.contact.email}</label>
+        <input
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
+          type="email"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+      <div>
+        <label class="block text-left font-semibold mb-1" for="message">{t.contact.message}</label>
+        <textarea
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
+          id="message"
+          name="message"
+          rows="5"
+          placeholder={t.contact.placeholder}
+          style="resize: none"
+          required></textarea>
+      </div>
+      <button
+        type="submit"
+        class="mt-2 px-6 py-3 bg-[#31a8cc] text-white font-medium rounded-lg shadow-md hover:bg-[#2596b2] transition-colors duration-300"
       >
-        <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">{t.contact.title}</h2>
-        <p class="md:text-lg font-medium mb-2">
-          {t.contact.subtitle}
-          <br /><strong>{t.contact.subtitleStrong}</strong>
-        </p>
-        <form
-          id="contact-form"
-          name="contact"
-          class="w-full max-w-lg mx-auto flex flex-col gap-4 bg-white rounded-lg shadow p-6"
-          name="contact"
-          aria-label="Formulario de contacto"
-          autocomplete="on"
-          data-sending={t.contact.sending}
-          data-success={t.contact.success}
-          data-error={t.contact.error}
-          data-unexpected={t.contact.unexpected}
-          data-redirect={`/${lang}`}
+        {t.contact.send}
+      </button>
+    </form>
+    <div class="flex flex-col items-center gap-2 mt-6">
+      <span class="font-semibold">{t.contact.otherContact}</span>
+      <div class="flex gap-4 justify-center mt-2">
+        <a
+          href="mailto:vdjoseluis@outlook.com"
+          class="text-[#31a8cc] hover:underline flex items-center gap-1 text-lg"
+          aria-label="Correo"
         >
-          <input type="hidden" name="form-name" value="contact" />
-          <div>
-            <label class="block text-left font-semibold mb-1" for="name">{t.contact.name}</label>
-            <input
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
-              type="text"
-              id="name"
-              name="name"
-              required
-            />
-          </div>
-          <div>
-            <label class="block text-left font-semibold mb-1" for="email">{t.contact.email}</label>
-            <input
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
-              type="email"
-              id="email"
-              name="email"
-              required
-            />
-          </div>
-          <div>
-            <label class="block text-left font-semibold mb-1" for="message">{t.contact.message}</label>
-            <textarea
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#31a8cc]"
-              id="message"
-              name="message"
-              rows="5"
-              placeholder={t.contact.placeholder}
-              style="resize: none"
-              required></textarea>
-          </div>
-          <button
-            type="submit"
-            class="mt-2 px-6 py-3 bg-[#31a8cc] text-white font-medium rounded-lg shadow-md hover:bg-[#2596b2] transition-colors duration-300"
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="black"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 12l-4-4-4 4m8 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6"></path></svg
           >
-            {t.contact.send}
-          </button>
-        </form>
-        <div class="flex flex-col items-center gap-2 mt-6">
-          <span class="font-semibold">{t.contact.otherContact}</span>
-          <div class="flex gap-4 justify-center mt-2">
-            <a
-              href="mailto:vdjoseluis@outlook.com"
-              class="text-[#31a8cc] hover:underline flex items-center gap-1 text-lg"
-              aria-label="Correo"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="black"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 12l-4-4-4 4m8 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6"
-                ></path></svg
-              >
-              vdjoseluis@outlook.com
-            </a>
-            <a
-              href="https://www.linkedin.com/in/vdjoseluis/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-[#31a8cc] hover:underline flex items-center gap-1 text-lg"
-              aria-label="LinkedIn"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"
-                ><path
-                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.869 0-2.156 1.459-2.156 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.844-1.563 3.042 0 3.604 2.003 3.604 4.605v5.591z"
-                ></path></svg
-              >
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/vdjoseluis"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-[#31a8cc] hover:underline flex items-center gap-1 text-lg"
-              aria-label="GitHub"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="black" viewBox="0 0 24 24"
-                ><path
-                  d="M12 .5C5.648.5.5 5.648.5 12c0 5.084 3.292 9.387 7.863 10.907.575.106.785-.25.785-.555 0-.274-.01-1.002-.015-1.966-3.2.695-3.878-1.543-3.878-1.543-.523-1.33-1.277-1.684-1.277-1.684-1.044-.714.08-.7.08-.7 1.155.081 1.763 1.187 1.763 1.187 1.026 1.759 2.693 1.251 3.35.957.104-.743.402-1.251.731-1.539-2.553-.291-5.238-1.277-5.238-5.687 0-1.256.448-2.283 1.184-3.089-.119-.292-.513-1.466.113-3.057 0 0 .966-.31 3.168 1.18.918-.255 1.904-.383 2.885-.388.98.005 1.967.133 2.885.388 2.2-1.49 3.165-1.18 3.165-1.18.627 1.591.233 2.765.114 3.057.738.806 1.183 1.833 1.183 3.089 0 4.42-2.688 5.393-5.25 5.679.413.355.779 1.056.779 2.129 0 1.537-.014 2.778-.014 3.157 0 .308.208.665.79.552C20.71 21.384 24 17.083 24 12c0-6.352-5.148-11.5-12-11.5z"
-                ></path></svg
-              >
-              GitHub
-            </a>
-          </div>
-        </div>
-      </article>
-    </section>
-  </main>
+          vdjoseluis@outlook.com
+        </a>
+        <a
+          href="https://www.linkedin.com/in/vdjoseluis/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[#31a8cc] hover:underline flex items-center gap-1 text-lg"
+          aria-label="LinkedIn"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"
+            ><path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.869 0-2.156 1.459-2.156 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.844-1.563 3.042 0 3.604 2.003 3.604 4.605v5.591z"
+            ></path></svg
+          >
+          LinkedIn
+        </a>
+        <a
+          href="https://github.com/vdjoseluis"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[#31a8cc] hover:underline flex items-center gap-1 text-lg"
+          aria-label="GitHub"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="black" viewBox="0 0 24 24"
+            ><path
+              d="M12 .5C5.648.5.5 5.648.5 12c0 5.084 3.292 9.387 7.863 10.907.575.106.785-.25.785-.555 0-.274-.01-1.002-.015-1.966-3.2.695-3.878-1.543-3.878-1.543-.523-1.33-1.277-1.684-1.277-1.684-1.044-.714.08-.7.08-.7 1.155.081 1.763 1.187 1.763 1.187 1.026 1.759 2.693 1.251 3.35.957.104-.743.402-1.251.731-1.539-2.553-.291-5.238-1.277-5.238-5.687 0-1.256.448-2.283 1.184-3.089-.119-.292-.513-1.466.113-3.057 0 0 .966-.31 3.168 1.18.918-.255 1.904-.383 2.885-.388.98.005 1.967.133 2.885.388 2.2-1.49 3.165-1.18 3.165-1.18.627 1.591.233 2.765.114 3.057.738.806 1.183 1.833 1.183 3.089 0 4.42-2.688 5.393-5.25 5.679.413.355.779 1.056.779 2.129 0 1.537-.014 2.778-.014 3.157 0 .308.208.665.79.552C20.71 21.384 24 17.083 24 12c0-6.352-5.148-11.5-12-11.5z"
+            ></path></svg
+          >
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
   <script src="/contact.js" is:inline></script>
 </Layout>

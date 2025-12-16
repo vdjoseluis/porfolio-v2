@@ -32,7 +32,7 @@ const languages = [
 <header class="sticky top-0 z-10 w-full backdrop-blur-lg border-b border-gray-800">
   <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
     <a href=`/${lang}` class="logo flex items-center gap-3">
-      <img src="/logo.svg" alt="" class="h-6"/>
+      <img src="/logo.svg" alt="" class="h-6" />
       <h2 class="lg:text-2xl font-bold">Portfolio</h2>
     </a>
 
@@ -74,7 +74,7 @@ const languages = [
       class="ml-2 rounded-full px-2 py-1 hover:bg-gray-400 transition-colors cursor-pointer"
       aria-label="Toggle dark mode"
     >
-      <img id="theme-icon" src="/icons/light-mode.svg" alt="Toggle theme" class="h-6 w-6" />
+      <img data-theme-icon src="/icons/light-mode.svg" alt="Toggle theme" class="h-6 w-6" />
     </button>
 
     <div class="flex items-center">
@@ -122,74 +122,15 @@ const languages = [
   </div>
 </header>
 
-<script is:inline>
-  (() => {
-    const menuToggle = document.getElementById("menu-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const links = Array.from(document.querySelectorAll("nav a, #mobile-menu a"));
+<script type="module">
+  import { initMobileMenu } from "/src/scripts/mobileMenu";
+  import { initActiveNav } from "/src/scripts/activeNav";
 
-    const setMenu = (open) => {
-      if (!mobileMenu || !menuToggle) return;
-      mobileMenu.classList.toggle("hidden", !open);
-      mobileMenu.classList.toggle("block", open);
-      menuToggle.setAttribute("aria-expanded", String(Boolean(open)));
-    };
+  const init = () => {
+    initMobileMenu();
+    initActiveNav();
+  };
 
-    // Toggle button
-    menuToggle?.addEventListener("click", () => setMenu(!mobileMenu.classList.contains("block")));
-
-    // Close when clicking a link inside mobile menu
-    mobileMenu?.addEventListener("click", (e) => {
-      const a = e.target.closest("a");
-      if (a) setMenu(false);
-    });
-
-    // Close on Escape or click outside when open
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setMenu(false);
-    });
-    document.addEventListener("click", (e) => {
-      if (!mobileMenu || mobileMenu.classList.contains("hidden")) return;
-      if (!e.target.closest("header")) setMenu(false);
-    });
-
-    // Mark active by pathname (exact match, root '/')
-    const updateActive = () => {
-      const path = location.pathname.replace(/\/$/, "") || "/";
-      links.forEach((a) => {
-        try {
-          const hrefPath = new URL(a.href, location.href).pathname.replace(/\/$/, "") || "/";
-          const isActive = hrefPath === path;
-          a.classList.toggle("active", isActive);
-          if (isActive) a.setAttribute("aria-current", "page");
-          else a.removeAttribute("aria-current");
-        } catch {
-          /* ignore */
-        }
-      });
-    };
-
-    // Init + SPA hooks
-    updateActive();
-    window.addEventListener("popstate", updateActive);
-    document.addEventListener("astro:after-swap", () => {
-      // Esperar al siguiente frame para asegurar que los links existen tras el swap
-      setTimeout(() => {
-        // Recolectar de nuevo los links porque el DOM cambió
-        const links = Array.from(document.querySelectorAll("nav a, #mobile-menu a"));
-        // Actualizar activos
-        const path = location.pathname.replace(/\/$/, "") || "/";
-        links.forEach((a) => {
-          try {
-            const hrefPath = new URL(a.href, location.href).pathname.replace(/\/$/, "") || "/";
-            const isActive = hrefPath === path;
-            a.classList.toggle("active", isActive);
-            if (isActive) a.setAttribute("aria-current", "page");
-            else a.removeAttribute("aria-current");
-          } catch {}
-        });
-        setMenu(false);
-      }, 0);
-    });
-  })();
+  init();
+  document.addEventListener("astro:after-swap", init);
 </script>
