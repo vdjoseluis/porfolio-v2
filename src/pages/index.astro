@@ -1,13 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
 const defaultLang = "es";
 ---
 
-<Layout title="Redirecting...">
-  <script>
-    if (typeof window !== "undefined") {
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=/${defaultLang}`} />
+    <script>
       window.location.replace("/es");
-    }
-  </script>
-</Layout>
+    </script>
+  </head>
+  <body></body>
+</html>
