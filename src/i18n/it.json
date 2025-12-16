@@ -19,8 +19,8 @@
     "p1": "Con una doppia formazione professionale, mi specializzo nella creazione di soluzioni digitali innovative ed efficienti. Il mio approccio si concentra su usabilità, prestazioni e adattabilità, garantendo che ogni progetto rispetti i più alti standard di qualità.",
     "p2": "Appassionato di tecnologia e in continua evoluzione, mi piace trasformare le idee in esperienze funzionali.",
     "languagesTitle": "Lingue",
-    "languages": ["Spagnolo", "Italiano", "Catalano", "Inglese", "Francese"],
-    "levels": ["Madrelingua", "Alto", "Alto", "Intermedio", "Base"],
+    "languages": ["Spagnolo", "Italiano", "Inglese", "Francese"],
+    "levels": ["Madrelingua", "Alto", "Intermedio", "Base"],
     "projectsBtn": "Vedi Progetti",
     "contactBtn": "Contattami"
   },

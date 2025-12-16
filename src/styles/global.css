@@ -8,3 +8,56 @@ nav a.active {
   color: #31a8cc;
   font-weight: 600;
 }
+
+.dark nav a.active {
+  color: #6dd6f3;
+}
+
+/* Modo oscuro base */
+.dark body, .dark section, .dark main {
+  background-color: #1E293B;
+  color: #e5e7eb;
+}
+
+.dark header {
+  background-color: #2D3A4F;
+  color: #e5e7eb;
+}
+
+.dark a {
+  color: #31a8cc;
+}
+
+.dark form {
+  color: black;
+}
+
+p {
+  color: #4b5563;
+}
+
+.dark p, .dark .logo {
+  color: #d1d5db;
+}
+
+::view-transition-old(fade) {
+  animation: fadeOut 400ms ease forwards;
+}
+
+::view-transition-new(fade) {
+  animation: fadeIn 600ms ease forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}

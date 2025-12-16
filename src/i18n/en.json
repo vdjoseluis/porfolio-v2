@@ -20,8 +20,8 @@
     "p1": "With dual professional training, I specialize in creating innovative and efficient digital solutions. My approach focuses on usability, performance, and adaptability, ensuring that each project meets the highest quality standards.",
     "p2": "Passionate about technology and constant learning, I enjoy turning ideas into functional experiences.",
     "languagesTitle": "Languages",
-    "languages": ["Spanish", "Italian", "Catalan", "English", "French"],
-    "levels": ["Native", "Advanced", "Advanced", "Intermediate", "Basic"],
+    "languages": ["Spanish", "Italian", "English", "French"],
+    "levels": ["Native", "Advanced", "Intermediate", "Basic"],
     "projectsBtn": "View Projects",
     "contactBtn": "Contact"
   },

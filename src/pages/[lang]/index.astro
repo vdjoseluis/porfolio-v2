@@ -14,53 +14,35 @@ const t = dict[lang];
   <section class="min-h-screen mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
     <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
       <div class="flex flex-col gap-6">
-        <h1
-          class="typing text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl animate-pulse"
-        >
+        <h1 class="typing text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl animate-pulse">
           {t.home.typing}
         </h1>
-
-        <!-- <script is:inline>
-          const text = "{t.home.typing}";
-          let i = 0;
-          const speed = 75;
-
-          function typeWriter() {
-            if (i < text.length) {
-              document.getElementById("typing").innerHTML += text.charAt(i);
-              i++;
-              setTimeout(typeWriter, speed);
-            }
-          }
-
-          typeWriter();
-        </script> -->
         <h2 class="text-xl sm:text-2xl font-bold text-[#31a8cc]">{t.home.subtitle}</h2>
 
-        <p class="md:text-lg text-gray-600 text-justify">{t.home.p1}</p>
-        <p class="md:text-lg text-gray-600 text-justify">{t.home.p2}</p>
+        <p class="md:text-lg text-justify">{t.home.p1}</p>
+        <p class="md:text-lg text-justify">{t.home.p2}</p>
 
+        <strong>{t.home.languagesTitle}:</strong>
         <div class="flex">
-          <strong>{t.home.languagesTitle}:</strong>
-          <ul class="ms-20 list-['🌐'] [&_li]:ps-2">
+          <ul class="ms-20 list-['🌐'] [&_li]:ps-2 [&_li]:py-1.5">
             <li>{t.home.languages[0]}</li>
             <li>{t.home.languages[1]}</li>
             <li>{t.home.languages[2]}</li>
             <li>{t.home.languages[3]}</li>
-            <li>{t.home.languages[4]}</li>
           </ul>
-          <ul class="mt-1 ms-4 [&_li]:bg-gray-200 [&_li]:px-2 [&_li]:rounded-md [&_li]:mb-2 [&_li]:text-xs">
+          <ul
+            class="mt-1 ms-8 [&_li]:bg-gray-200 [&_li]:px-3 [&_li]:py-1 [&_li]:rounded-md [&_li]:mb-2 [&_li]:text-sm text-gray-700 text-center"
+          >
             <li>{t.home.levels[0]}</li>
             <li>{t.home.levels[1]}</li>
             <li>{t.home.levels[2]}</li>
             <li>{t.home.levels[3]}</li>
-            <li>{t.home.levels[4]}</li>
           </ul>
         </div>
 
         <div class="flex flex-wrap gap-4">
           <a
-            class="rounded-lg bg-[#31a8cc] px-5 py-3 font-bold text-white shadow-lg transition-transform duration-200 hover:scale-105"
+            class="rounded-lg bg-[#31a8cc] px-5 py-3 font-bold !text-white shadow-lg transition-transform duration-200 hover:scale-105"
             href={`/${lang}/projects`}
           >
             {t.home.projectsBtn}
@@ -79,13 +61,14 @@ const t = dict[lang];
           >
         </div>
       </div>
-      <div class="relative mx-auto w-full max-w-xs aspect-[3/4] rounded-xl shadow-2xl sm:max-w-sm">
-        <div class="relative h-full w-full rounded-xl overflow-hidden">
-          <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('/foto.png')`}></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-transparent"></div>
-        </div>
-
-        <div class="absolute inset-0 rounded-xl bg-gradient-to-t from-background-light via-transparent"></div>
+      <div class="relative mx-auto w-full max-w-xs aspect-[3/4] rounded-xl shadow-2xl sm:max-w-sm overflow-hidden">
+        <img
+          id="profile-photo"
+          src="/foto.png"
+          alt="Foto de Jose Luis Vasquez Drouet"
+          class="w-full h-full object-cover rounded-xl transition duration-300"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
