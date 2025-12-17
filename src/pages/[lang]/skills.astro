@@ -12,18 +12,18 @@ const t = dict[lang];
 
 const frontendSkills = ["Angular", "React", "HTML", "CSS", "JavaScript", "TypeScript", "Tailwind", "Bootstrap"].map(
   (name) => {
-    const icon = `/skills/${name}.svg`;
+    const icon = `/skills/${name.toLowerCase()}.svg`;
     return { name, icon };
   }
 );
 
 const backendSkills = ["NestJS", "Node", "Java", "PHP", "MySQL", "PostgreSQL", "MongoDB", "Firebase"].map((name) => {
-  const icon = `/skills/${name}.svg`;
+  const icon = `/skills/${name.toLowerCase()}.svg`;
   return { name, icon };
 });
 
 const mobileAndOthersSkills = ["Android", "Kotlin", "Git", "Github", "Inkscape", "Canva"].map((name) => {
-  const icon = `/skills/${name}.svg`;
+  const icon = `/skills/${name.toLowerCase()}.svg`;
   return { name, icon };
 });
 ---
@@ -38,9 +38,9 @@ const mobileAndOthersSkills = ["Android", "Kotlin", "Git", "Github", "Inkscape",
     </div>
 
     <div class="flex justify-center flex-wrap gap-10">
-      <SkillCard title={t.skills.frontend} icon="/skills/Frontend.svg" skills={frontendSkills} />
+      <SkillCard title={t.skills.frontend} icon="/skills/frontend.svg" skills={frontendSkills} />
 
-      <SkillCard title={t.skills.backend} icon="/skills/Backend.svg" skills={backendSkills} />
+      <SkillCard title={t.skills.backend} icon="/skills/backend.svg" skills={backendSkills} />
 
       <SkillCard title={t.skills.other} icon="/skills/multi-platform.svg" skills={mobileAndOthersSkills} />
     </div>
