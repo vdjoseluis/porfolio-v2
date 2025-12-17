@@ -40,6 +40,12 @@ p {
   color: #d1d5db;
 }
 
+.dark .card {
+  background-color: #4b5563;
+  color: #e5e7eb;
+  border-radius: 0.5rem;
+}
+
 ::view-transition-old(fade) {
   animation: fadeOut 400ms ease forwards;
 }

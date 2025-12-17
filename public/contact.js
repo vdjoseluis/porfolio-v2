@@ -1,6 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initContactForm() {
   const form = document.getElementById("contact-form");
-  if (!form) return;
+  if (!form || form.dataset.bound === "true") return;
+
+  form.dataset.bound = "true";
 
   const i18n = {
     sending: form.dataset.sending,
@@ -33,9 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const submitBtn = form.querySelector('button[type="submit"]');
-    if (submitBtn) submitBtn.disabled = true;
 
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn?.disabled) return;
+
+    submitBtn.disabled = true;
     showAlert(i18n.sending, "success");
 
     try {
@@ -49,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (res.ok && data?.success) {
         showAlert(i18n.success, "success");
         form.reset();
+
         setTimeout(() => {
           window.location.href = i18n.redirectTo;
         }, 2500);
@@ -59,7 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error(err);
       showAlert(i18n.unexpected, "error");
     } finally {
-      if (submitBtn) submitBtn.disabled = false;
+      submitBtn.disabled = false;
     }
   });
-});
+}
+
+if (typeof window !== "undefined") {
+  document.addEventListener("astro:page-load", initContactForm);
+  document.addEventListener("astro:after-swap", initContactForm);
+}
