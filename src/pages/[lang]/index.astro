@@ -12,12 +12,12 @@ const t = dict[lang];
 
 <Layout title={t.meta.homeTitle}>
   <section class="min-h-screen mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
       <div class="flex flex-col gap-6">
-        <h1 class="typing text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl animate-pulse">
-          {t.home.typing}
+        <h1 class="text-xl font-bold sm:tracking-tight sm:text-3xl xl:text-4xl animate-pulse">
+          {t.home.greeting}
         </h1>
-        <h2 class="text-xl sm:text-2xl font-bold text-[#31a8cc]">{t.home.subtitle}</h2>
+        <h2 class="text-lg sm:text-2xl font-bold text-[#31a8cc]">{t.home.subtitle}</h2>
 
         <p class="md:text-lg text-justify">{t.home.p1}</p>
         <p class="md:text-lg text-justify">{t.home.p2}</p>
@@ -53,12 +53,16 @@ const t = dict[lang];
           >
             {t.home.contactBtn}
           </a>
+          <div class="flex lg:mt-4 gap-2 items-center">
+            <img src="/skills/github.svg" alt="Icono de GitHub" class="h-6"/>
           <a
             href="https://github.com/vdjoseluis/porfolio-v2"
             target="_blank"
-            class="mx-auto md:mt-4 text-[#31a8cc] hover:underline"
+            class="mx-auto text-[#31a8cc] hover:underline"
             aria-label="Ir al repositorio">REPO: https://github.com/vdjoseluis/portfolio</a
           >
+          </div>
+          
         </div>
       </div>
       <div class="relative mx-auto w-full max-w-xs aspect-[3/4] rounded-xl shadow-2xl sm:max-w-sm overflow-hidden">
